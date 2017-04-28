@@ -1,0 +1,41 @@
+<div class="container form-group">
+<h1>Survey Questions</h1>
+<hr>
+<h2>About You</h2>
+<h4>Name (Required)</h4>
+<input type="text" name="name" id="name" class="form-control" required="">
+<h4>Link of your Photo (Required)</h4>
+<input type="text" name="name" id="name" class="form-control" required="">
+<hr>
+
+{{#each questions}}
+<h3> Question {{ this.questionNum }} </h3>
+<h4> {{ this.question }} </h4>
+  <div class="dropdown" >
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" index="{{this.questionNum}}" id="ans-{{this.questionNum}}">
+        Select an Option  <span class="caret"></span>
+    </button>
+    <ul index="{{this.questionNum}}" class="dropdown-menu" >
+      <li><a href="#">1 (Strongly Disagree)</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">5 (Strongly Agree)</a></li>
+    </ul>
+  </div>
+  {{/each}}
+  <hr>
+<button type="submit" class="btn btn-primary btn-lg btn-block" id="submit">
+    Submit
+ </button>
+</div>
+
+<script>
+   $(function(){
+    $(".dropdown-menu li a").click(function(){
+        var id = $(this).parent().parent().attr("index");
+      $("#ans-"+ id).text($(this).text());
+      $("#ans-"+ id).val($(this).text());
+   });
+});
+</script>

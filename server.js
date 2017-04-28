@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var exphbs = require('express-handlebars');
+var questions = require('./questions');
 
 var app = express();
 var PORT = 3000;
@@ -20,7 +21,11 @@ app.get("/", function(req, res) {
 });
 
 app.get("/survey", function(req, res) {
-    res.render("survey", {});
+    res.render("survey", { questions: questions.questions });
+});
+
+app.get("/api/friends", function(req, res) {
+
 });
 
 app.listen(PORT, function(err) {
