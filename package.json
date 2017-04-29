@@ -1,33 +1,34 @@
 {
-  "name": "friend-finder",
-  "version": "1.0.0",
-  "description": "HW - Friend finder a dating app in node & express JS.",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rutulpatel/friend-finder.git"
-  },
-  "keywords": [
-    "nodejs",
-    "friends",
-    "dating",
-    "app",
-    "homework"
-  ],
-  "author": "Rutul Patel <rutulpatel.rtl@gmail.com>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rutulpatel/friend-finder/issues"
-  },
-  "homepage": "https://github.com/rutulpatel/friend-finder#readme",
-  "dependencies": {
-    "body-parser": "^1.17.1",
-    "express": "^4.15.2",
-    "express-handlebars": "^3.0.0",
-    "jsonfile": "^3.0.0",
-    "path": "^0.12.7"
-  }
+    "name": "friend-finder",
+    "version": "1.0.0",
+    "description": "HW - Friend finder a dating app in node & express JS.",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rutulpatel/friend-finder.git"
+    },
+    "keywords": [
+        "nodejs",
+        "friends",
+        "dating",
+        "app",
+        "homework"
+    ],
+    "author": "Rutul Patel <rutulpatel.rtl@gmail.com>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/rutulpatel/friend-finder/issues"
+    },
+    "homepage": "https://github.com/rutulpatel/friend-finder#readme",
+    "dependencies": {
+        "body-parser": "^1.17.1",
+        "express": "^4.15.2",
+        "express-handlebars": "^3.0.0",
+        "jsonfile": "^3.0.0",
+        "path": "^0.12.7"
+    }
 }

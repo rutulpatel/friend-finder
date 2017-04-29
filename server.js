@@ -7,7 +7,7 @@ var fs = require('fs');
 var m = require('./match');
 
 var app = express();
-var PORT = 3000;
+// var PORT = 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -43,6 +43,6 @@ app.post("/survey", function(req, res) {
     });
 });
 
-app.listen(PORT, function(err) {
-    console.log("app listening on " + PORT);
+app.listen(process.env.PORT, function(err) {
+    console.log("app listening on " + process.env.PORT);
 });
