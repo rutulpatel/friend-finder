@@ -1,19 +1,11 @@
 var fs = require('fs');
 var jsonfile = require('jsonfile')
 
-module.exports.add = function(newUser) {
-    var users;
-    fs.readFile('users.json', 'utf-8', function(err, data) {
-        users = JSON.parse(data);
-        users.push(newUser);
-        // console.log(typeof users);
-
-        jsonfile.writeFileSync('users.json', users, {}, function(err) {
-            throw err;
-        });
+module.exports.add = function(allUsers, newUser) {
+    allUsers.push(newUser);
+    jsonfile.writeFile('users.json', allUsers, function(err) {
+        if (err) throw err;
     });
-
-
 }
 
 module.exports.match = function(allUsers, newUserData) {
@@ -37,7 +29,7 @@ module.exports.match = function(allUsers, newUserData) {
     }
     // console.log(newUserData);
     // console.log(matchingUser);
-    // module.exports.add(newUserData);
+    module.exports.add(allUsers, newUserData);
     return matchingUser;
 }
 
@@ -45,6 +37,6 @@ module.exports.match = function(allUsers, newUserData) {
 //     module.exports.match(users, { name: 'asdvds', photoUrl: 'sdvd', answers: [3, 2, 0, 0, 0, 1, 0, 0, 2, 2] });
 // });
 
-// // fs.readFile('users.json', 'utf-8', function(err, data) {
-// //     console.log(JSON.parse(data));
-// // });
+// fs.readFile('users.json', 'utf-8', function(err, data) {
+//     console.log(JSON.parse(data));
+// });
