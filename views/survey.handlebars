@@ -1,41 +1,122 @@
+{{!--<form>--}}
 <div class="container form-group">
 <h1>Survey Questions</h1>
 <hr>
 <h2>About You</h2>
+<div class="container form-group">
 <h4>Name (Required)</h4>
 <input type="text" name="name" id="name" class="form-control" required="">
+</div>
+<div class="container form-group">
 <h4>Link of your Photo (Required)</h4>
-<input type="text" name="name" id="name" class="form-control" required="">
+<input type="text" name="photoUrl" id="photoUrl" class="form-control" required="">
+</div>
 <hr>
-
+<div class="container form-group">
 {{#each questions}}
 <h3> Question {{ this.questionNum }} </h3>
 <h4> {{ this.question }} </h4>
-  <div class="dropdown" >
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" index="{{this.questionNum}}" id="ans-{{this.questionNum}}">
+  <div class="dropdown " >
+    <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown" name="a{{this.questionNum}}" index="{{this.questionNum}}" id="a{{this.questionNum}}">
         Select an Option  <span class="caret"></span>
     </button>
-    <ul index="{{this.questionNum}}" class="dropdown-menu" >
-      <li><a href="#">1 (Strongly Disagree)</a></li>
-      <li><a href="#">2</a></li>
-      <li><a href="#">3</a></li>
-      <li><a href="#">4</a></li>
-      <li><a href="#">5 (Strongly Agree)</a></li>
+    <ul index="{{this.questionNum}}" name="a{{this.questionNum}}" class="dropdown-menu" >
+      <li><a>1 (Strongly Disagree)</a></li>
+      <li><a>2</a></li>
+      <li><a>3</a></li>
+      <li><a>4</a></li>
+      <li><a>5 (Strongly Agree)</a></li>
     </ul>
   </div>
   {{/each}}
+</div>
   <hr>
 <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit">
     Submit
  </button>
 </div>
+{{!--</form>--}}
+<a href="#" id="pop">
+</a>
+
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h2 class="modal-title text-center" id="myModalLabel">Your closest match!!!</h2>
+      </div>
+      <div class="modal-body text-center">
+        <img src="" id="matchPic" style="width: 400px; height: 400px;" >
+        <h3 id="matchName"></h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
    $(function(){
+
+    $("#pop").hide();
+
     $(".dropdown-menu li a").click(function(){
         var id = $(this).parent().parent().attr("index");
-      $("#ans-"+ id).text($(this).text());
-      $("#ans-"+ id).val($(this).text());
+      $("#a"+ id).text($(this).text());
+      $("#a"+ id).val($(this).text());
+   });
+
+   $("#submit").on("click", function() {
+
+      var NUM_OF_QUESTIONS = 10;
+       var ansCount = 0;
+       var data = {
+           name: $("#name").val(),
+           photoUrl: $("#photoUrl").val(),
+           answers: [ 
+           $("#a1").val(),
+           $("#a2").val(),
+           $("#a3").val(),
+           $("#a4").val(),
+           $("#a5").val(),
+           $("#a6").val(),
+           $("#a7").val(),
+           $("#a8").val(),
+           $("#a9").val(),
+           $("#a10").val(),
+           ]
+       };
+       console.log(data);
+       data.answers = [];
+       for(var i = 1; i <= NUM_OF_QUESTIONS; i++) {
+           console.log($("#a"+i).val());
+            if($("#a"+i).val() !== "") {
+                data.answers.push(parseInt($("#a"+i).val().split(" ")[0]));
+                ansCount++;
+            } else {
+                alert("Please answer all the questions.");
+                break;
+            }
+       }
+
+       if(ansCount >= NUM_OF_QUESTIONS) {
+            var currentURL = window.location.origin;
+            $.post(currentURL + "/survey", data, function(d) {
+                console.log(d);    
+                $('#matchPic').attr('src', d.photoUrl); // here asign the image to the modal when the user click the enlarge link
+                $('#matchName').html(d.name);
+                $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+                $("#pop").show();
+                $("#name").val("");
+                $("#photoUrl").val("")
+                $('[id^=a]').text('Select an Option');
+                $('[id^=a]').val('');
+            });
+       }
+       
    });
 });
 </script>

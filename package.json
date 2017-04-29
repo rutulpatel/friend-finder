@@ -27,6 +27,7 @@
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "express-handlebars": "^3.0.0",
+    "jsonfile": "^3.0.0",
     "path": "^0.12.7"
   }
 }
