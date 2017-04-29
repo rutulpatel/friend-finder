@@ -19,7 +19,7 @@ module.exports.match = function(allUsers, newUserData) {
         // console.log(allUsers[i].answers);
         tmpDiff = 0;
         for (var j = 0; j < allUsers[i].answers.length; j++) {
-            tmpDiff += Math.abs(allUsers[i].answers[j] - newUserData.answers[j]);
+            tmpDiff += Math.abs(parseInt(allUsers[i].answers[j]) - parseInt(newUserData.answers[j]));
         }
         // console.log("tmpDiff", tmpDiff);
         if (tmpDiff < difference) {

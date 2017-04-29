@@ -101,7 +101,7 @@
                 break;
             }
        }
-
+       console.log(data);
        if(ansCount >= NUM_OF_QUESTIONS) {
             var currentURL = window.location.origin;
             $.post(currentURL + "/survey", data, function(d) {
